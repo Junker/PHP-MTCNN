@@ -1,0 +1,20 @@
+{
+    "name": "junker/php-mtcnn",
+    "description": "Implementation of the MTCNN face detector for PHP",
+    "keywords": ["MTCNN", "opencv","face detection", "DNN"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmitry Kosenkov",
+            "email": "dk-junker@ya.ru"
+        }
+    ],
+    "require": {
+        "ext-opencv": "*"
+    },
+    "autoload": {
+        "psr-0" : {
+            "Junker" : "src/"
+        }
+    }
+}
