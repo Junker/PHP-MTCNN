@@ -36,7 +36,7 @@ class MTCNN
 	{
 		$model_dir = __DIR__ . '/../../../model';
 
-		$this->PNet = readNetFromCaffe($model_dir . "/det1_.prototxt", $model_dir . "/det1_.caffemodel");
+		$this->PNet = readNetFromCaffe($model_dir . "/det1-half.prototxt", $model_dir . "/det1-half.caffemodel");
 		$this->RNet = readNetFromCaffe($model_dir . "/det2.prototxt", $model_dir . "/det2-half.caffemodel");
 		$this->ONet = readNetFromCaffe($model_dir . "/det3-half.prototxt", $model_dir . "/det3-half.caffemodel");
 	}
