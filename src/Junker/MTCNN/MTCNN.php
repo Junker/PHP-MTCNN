@@ -25,8 +25,8 @@ class MTCNN
 
 	const STEP_SIZE = 128;
 
-	const NMS_METHOD_MIN = 0;
-	const NMS_METHOD_UNION = 1;
+	const NMS_METHOD_MIN = 1;
+	const NMS_METHOD_UNION = 2;
 
 
 	private array $candidate_boxes = [];
@@ -213,7 +213,7 @@ class MTCNN
 		$reg_box = null;
 		$reg_landmark = null;
 
-		$targets_blobs = [];
+		$target_blobs = [];
 
 		switch ($stage_num)
 		{
@@ -246,7 +246,7 @@ class MTCNN
 		{
 			case 2:
 				$this->RNet->setInput($blob_input, "data");
-				$targets_node = ["conv5-2","prob1"];
+				$targets_node = ["conv5-2", "prob1"];
 				$targets_blobs = $this->RNet->forwardMulti($targets_node);
 				$confidence = $targets_blobs[1];
 				$reg_box = $targets_blobs[0];
@@ -323,10 +323,10 @@ class MTCNN
 
 			$this->PNet->setInput($inputBlob, "data");
 
-			$targets_node = ["conv4-2","prob1"];
-			$targets_blobs = $this->PNet->forwardMulti($targets_node);
-			$prob = $targets_blobs[1];
-			$reg = $targets_blobs[0];
+			$target_blob_names = ["conv4-2", "prob1"];
+			$target_blobs = $this->PNet->forwardMulti($target_blob_names);
+			$prob = $target_blobs[1];
+			$reg = $target_blobs[0];
 
 			$this->generateBBox($prob, $reg, $scales[$i], $threshold);
 
@@ -364,7 +364,7 @@ class MTCNN
 				$pnet_res = array_slice($pnet_res, 0, self::PNET_MAX_DETECT_NUM);
 
 			$num = count($pnet_res);
-			$size = (int)ceil(1*$num / self::STEP_SIZE);
+			$size = (int)ceil($num / self::STEP_SIZE);
 
 			for ($iter = 0; $iter < $size; ++$iter)
 			{
