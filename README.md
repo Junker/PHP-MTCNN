@@ -9,6 +9,11 @@
 - PHP 7.4 / 8.0
 - PHP extension [php-opencv](https://github.com/php-opencv/php-opencv)
 
+## Installation
+The best way to install PHP-MTCNN is to use a [Composer](https://getcomposer.org/download):
+
+    php composer.phar require junker/php-mtcnn
+
 ## Usage
 
 ```php
