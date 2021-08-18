@@ -246,15 +246,15 @@ class MTCNN
 		{
 			case 2:
 				$this->RNet->setInput($blob_input, "data");
-				$targets_node = ["conv5-2", "prob1"];
-				$targets_blobs = $this->RNet->forwardMulti($targets_node);
+				$target_blob_names = ["conv5-2", "prob1"];
+				$targets_blobs = $this->RNet->forwardMulti($target_blob_names);
 				$confidence = $targets_blobs[1];
 				$reg_box = $targets_blobs[0];
 				break;
 			case 3:
 				$this->ONet->setInput($blob_input, "data");
-				$targets_node = ["conv6-2","conv6-3","prob1"];
-				$targets_blobs = $this->ONet->forwardMulti($targets_node);
+				$target_blob_names = ["conv6-2", "conv6-3", "prob1"];
+				$targets_blobs = $this->ONet->forwardMulti($target_blob_names);
 				$reg_box = $targets_blobs[0];
 				$reg_landmark = $targets_blobs[1];
 				$confidence = $targets_blobs[2];
